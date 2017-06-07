@@ -1,6 +1,15 @@
 #include <windows.h>
 
-int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
+#include "Application.hpp"
+#include "Window.hpp"
+
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int)
 {
-    return 0;
+    const Application app{};
+    Window window{ hInstance };
+
+    window.display();
+
+    return app.run([] {
+    });
 }
