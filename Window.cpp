@@ -5,6 +5,7 @@
 #include "Size.hpp"
 
 Window::Window(HINSTANCE hInstance)
+    : m_isFullScreen(false)
 {
     WNDCLASSW wndClass{};
     wndClass.style = CS_HREDRAW | CS_VREDRAW;
@@ -42,6 +43,31 @@ Size Window::getSize() const
 }
 
 void Window::display() noexcept { ShowWindow(this->m_hWnd, SW_SHOWDEFAULT); }
+
+void Window::makeFullScreen()
+{
+    if (this->m_isFullScreen) {
+        return;
+    }
+
+    auto hMonitor = MonitorFromWindow(nullptr, MONITOR_DEFAULTTOPRIMARY);
+    MONITORINFO monitorInfo = {};
+    monitorInfo.cbSize = sizeof(MONITORINFO);
+
+    if (!GetMonitorInfoW(hMonitor, &monitorInfo)) {
+        throw std::runtime_error("Can't get monitor information");
+    }
+
+    SetWindowLongPtrW(this->m_hWnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+
+    const RECT& r = monitorInfo.rcMonitor;
+    if (!SetWindowPos(
+            this->m_hWnd, HWND_TOP, r.left, r.top, r.right, r.bottom, 0)) {
+        throw std::runtime_error("Can't set window position");
+    }
+
+    this->m_isFullScreen = true;
+}
 
 LRESULT CALLBACK Window::WndProc(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) noexcept

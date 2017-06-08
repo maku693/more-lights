@@ -12,9 +12,11 @@ public:
     Size getSize() const;
 
     void display() noexcept;
+    void makeFullScreen();
 
 private:
     HWND m_hWnd;
+    bool m_isFullScreen;
 
     static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 };
