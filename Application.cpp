@@ -23,7 +23,7 @@ int Application::run(std::function<void()> mainLoop) const
         DispatchMessageW(&message);
     }
 
-    return message.wParam;
+    return static_cast<int>(message.wParam);
 }
 
 void Application::terminate() const noexcept
