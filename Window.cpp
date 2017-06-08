@@ -41,10 +41,7 @@ Size Window::getSize() const
         static_cast<float>(r.bottom - r.top) };
 }
 
-void Window::display() const noexcept
-{
-    ShowWindow(this->m_hWnd, SW_SHOWDEFAULT);
-}
+void Window::display() noexcept { ShowWindow(this->m_hWnd, SW_SHOWDEFAULT); }
 
 LRESULT CALLBACK Window::WndProc(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) noexcept

@@ -11,7 +11,7 @@ public:
     HWND getHWnd() const noexcept;
     Size getSize() const;
 
-    void display() const noexcept;
+    void display() noexcept;
 
 private:
     HWND m_hWnd;
