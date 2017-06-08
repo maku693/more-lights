@@ -13,3 +13,5 @@ add_definitions(-DUNICODE -D_UNICODE)
 add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
+
+target_compile_options(${PROJECT_NAME} PRIVATE "/W4")
