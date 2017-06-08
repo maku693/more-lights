@@ -4,11 +4,10 @@
 
 int Application::run(std::function<void()> mainLoop) const
 {
-    MSG message {};
+    MSG message{};
     while (true) {
-        const auto isMessageAvailable = PeekMessageW(
-            &message, nullptr, 0, 0, PM_REMOVE
-        );
+        const auto isMessageAvailable
+            = PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE);
 
         if (!isMessageAvailable) {
             mainLoop();
@@ -26,7 +25,4 @@ int Application::run(std::function<void()> mainLoop) const
     return static_cast<int>(message.wParam);
 }
 
-void Application::terminate() const noexcept
-{
-    PostQuitMessage(0);
-}
+void Application::terminate() const noexcept { PostQuitMessage(0); }
