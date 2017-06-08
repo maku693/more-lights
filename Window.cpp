@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+#include "Size.hpp"
+
 Window::Window(HINSTANCE hInstance)
 {
     WNDCLASSW wndClass{};
@@ -27,6 +29,17 @@ Window::Window(HINSTANCE hInstance)
 }
 
 HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
+
+Size Window::getSize() const
+{
+    RECT r;
+    if (GetWindowRect(this->m_hWnd, &r)) {
+        throw std::runtime_error("Can't get window rect");
+    }
+
+    return Size{ static_cast<float>(r.right - r.left),
+        static_cast<float>(r.bottom - r.top) };
+}
 
 void Window::display() const noexcept
 {
