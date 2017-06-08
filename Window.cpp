@@ -19,8 +19,8 @@ Window::Window(HINSTANCE hInstance)
     }
 
     this->m_hWnd = CreateWindowW(MAKEINTATOM(atom), L"", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, nullptr,
-        nullptr, hInstance, nullptr);
+        CW_USEDEFAULT, CW_USEDEFAULT, 640, 360, nullptr, nullptr, hInstance,
+        nullptr);
 }
 
 HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
