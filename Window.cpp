@@ -21,6 +21,9 @@ Window::Window(HINSTANCE hInstance)
     this->m_hWnd = CreateWindowW(MAKEINTATOM(atom), L"", WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 640, 360, nullptr, nullptr, hInstance,
         nullptr);
+    if (!this->m_hWnd) {
+        throw std::runtime_error("Window creation failed");
+    }
 }
 
 HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
