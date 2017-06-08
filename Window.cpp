@@ -10,7 +10,7 @@ Window::Window(HINSTANCE hInstance)
     wndClass.style = CS_HREDRAW | CS_VREDRAW;
     wndClass.lpfnWndProc = reinterpret_cast<WNDPROC>(Window::WndProc);
     wndClass.hInstance = hInstance;
-    wndClass.hCursor = LoadCursor(hInstance, IDC_ARROW);
+    wndClass.hCursor = LoadCursorW(hInstance, IDC_ARROW);
     wndClass.hbrBackground
         = reinterpret_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
     wndClass.lpszClassName = L"Window";
