@@ -6,7 +6,7 @@ class Window {
 public:
     Window(HINSTANCE);
 
-    constexpr HWND getHWnd() const noexcept;
+    HWND getHWnd() const noexcept;
 
     void display() const noexcept;
 

@@ -23,7 +23,7 @@ Window::Window(HINSTANCE hInstance)
         nullptr, hInstance, nullptr);
 }
 
-constexpr HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
+HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
 
 void Window::display() const noexcept
 {
