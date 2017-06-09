@@ -2,14 +2,20 @@
 
 #include <windows.h>
 
+namespace Util {
+
 class Size;
+
+}
+
+namespace System {
 
 class Window {
 public:
     Window(HINSTANCE);
 
     HWND getHWnd() const noexcept;
-    Size getSize() const;
+    Util::Size getSize() const;
 
     void display() noexcept;
     void makeFullScreen();
@@ -20,3 +26,5 @@ private:
 
     static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 };
+
+}

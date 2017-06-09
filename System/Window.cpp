@@ -2,7 +2,9 @@
 
 #include <stdexcept>
 
-#include "Size.hpp"
+#include "Util/Size.hpp"
+
+namespace System {
 
 Window::Window(HINSTANCE hInstance)
     : m_isFullScreen(false)
@@ -31,14 +33,14 @@ Window::Window(HINSTANCE hInstance)
 
 HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
 
-Size Window::getSize() const
+Util::Size Window::getSize() const
 {
     RECT r;
     if (GetWindowRect(this->m_hWnd, &r)) {
         throw std::runtime_error("Can't get window rect");
     }
 
-    return Size{ static_cast<float>(r.right - r.left),
+    return Util::Size{ static_cast<float>(r.right - r.left),
         static_cast<float>(r.bottom - r.top) };
 }
 
@@ -72,5 +74,8 @@ void Window::makeFullScreen()
 LRESULT CALLBACK Window::WndProc(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) noexcept
 {
+    // TODO: handle window messages and translate to app-local messages
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
 }

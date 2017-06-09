@@ -1,12 +1,12 @@
 #include <windows.h>
 
-#include "Application.hpp"
-#include "Window.hpp"
+#include "System/Application.hpp"
+#include "System/Window.hpp"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int)
 {
-    const Application app{};
-    Window window{ hInstance };
+    const System::Application app{};
+    System::Window window{ hInstance };
 
     window.display();
 
