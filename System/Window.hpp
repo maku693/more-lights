@@ -2,6 +2,8 @@
 
 #include <windows.h>
 
+#include <string>
+
 namespace Util {
 
 class Size;
@@ -16,6 +18,8 @@ public:
 
     HWND getHWnd() const noexcept;
     Util::Size getSize() const;
+
+    void setTitle(const std::string&) noexcept;
 
     void display() noexcept;
     void makeFullScreen();

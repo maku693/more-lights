@@ -1,5 +1,6 @@
 #include "window.hpp"
 
+#include <codecvt>
 #include <stdexcept>
 
 #include "Util/Size.hpp"
@@ -42,6 +43,13 @@ Util::Size Window::getSize() const
 
     return Util::Size{ static_cast<float>(r.right - r.left),
         static_cast<float>(r.bottom - r.top) };
+}
+
+void Window::setTitle(const std::string& title) noexcept
+{
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> convert;
+    std::wstring widened = convert.from_bytes(title.data());
+    SetWindowText(this->m_hWnd, widened.data());
 }
 
 void Window::display() noexcept { ShowWindow(this->m_hWnd, SW_SHOWDEFAULT); }
