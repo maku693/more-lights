@@ -61,7 +61,7 @@ void Window::makeFullScreen()
     }
 
     auto hMonitor = MonitorFromWindow(nullptr, MONITOR_DEFAULTTOPRIMARY);
-    MONITORINFO monitorInfo = {};
+    MONITORINFO monitorInfo{};
     monitorInfo.cbSize = sizeof(MONITORINFO);
 
     if (!GetMonitorInfoW(hMonitor, &monitorInfo)) {
