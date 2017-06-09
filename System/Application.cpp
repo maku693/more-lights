@@ -29,4 +29,4 @@ int Application::run(std::function<void()> mainLoop) const
 
 void Application::terminate() const noexcept { PostQuitMessage(0); }
 
-}
+} // namespace System

@@ -10,4 +10,4 @@ public:
     void terminate() const noexcept;
 };
 
-}
+} // namespace System

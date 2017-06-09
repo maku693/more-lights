@@ -27,4 +27,4 @@ private:
     float m_height;
 };
 
-}
+} // namespace Util

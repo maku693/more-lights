@@ -6,7 +6,7 @@ namespace Util {
 
 class Size;
 
-}
+} // namespace Util
 
 namespace System {
 
@@ -27,4 +27,4 @@ private:
     static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 };
 
-}
+} // namespace System

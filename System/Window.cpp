@@ -78,4 +78,4 @@ LRESULT CALLBACK Window::WndProc(
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-}
+} // namespace System
