@@ -18,6 +18,7 @@ public:
 
     HWND getHWnd() const noexcept;
     Util::Size getSize() const;
+    bool isVisible() const noexcept;
 
     void setTitle(const std::string&) noexcept;
 

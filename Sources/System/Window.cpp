@@ -45,6 +45,11 @@ Util::Size Window::getSize() const
         static_cast<float>(r.bottom - r.top) };
 }
 
+bool Window::isVisible() const noexcept
+{
+    return IsWindowVisible(this->m_hWnd);
+}
+
 void Window::setTitle(const std::string& title) noexcept
 {
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> convert;

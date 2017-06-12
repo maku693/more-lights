@@ -5,11 +5,14 @@
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int)
 {
-    const System::Application app{};
+    const System::Application app;
     System::Window window{ hInstance };
 
     window.display();
 
-    return app.run([] {
+    return app.run([&] {
+        if (!window.isVisible()) {
+            app.terminate();
+        }
     });
 }
