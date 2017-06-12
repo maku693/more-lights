@@ -8,10 +8,7 @@ int Application::run(std::function<void()> mainLoop) const
 {
     MSG message{};
     while (true) {
-        const auto isMessageAvailable
-            = PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE);
-
-        if (!isMessageAvailable) {
+        if (!PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) {
             mainLoop();
             continue;
         }
