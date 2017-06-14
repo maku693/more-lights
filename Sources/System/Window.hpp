@@ -19,7 +19,6 @@ public:
 
     HWND getHWnd() const noexcept;
     Util::Size getSize() const;
-    bool isVisible() const noexcept;
 
     void setOnClose(std::function<void()>) noexcept;
     void setTitle(const std::string&) noexcept;

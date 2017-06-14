@@ -52,11 +52,6 @@ Util::Size Window::getSize() const
         static_cast<float>(r.bottom - r.top) };
 }
 
-bool Window::isVisible() const noexcept
-{
-    return IsWindowVisible(this->m_hWnd);
-}
-
 void Window::setOnClose(std::function<void()> onClose) noexcept
 {
     this->m_onClose = onClose;
