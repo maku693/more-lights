@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "Util/Size.hpp"
+#include "System/Keyboard.hpp"
 
 namespace System {
 
@@ -57,6 +58,11 @@ void Window::setOnClose(std::function<void()> onClose) noexcept
     this->m_onClose = onClose;
 }
 
+void Window::setOnKeyboard(std::function<void(KeyCode, KeyState)> onKeyboard) noexcept
+{
+    this->m_onKeyboard = onKeyboard;
+}
+
 void Window::setTitle(const std::string& title) noexcept
 {
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> convert;
@@ -103,7 +109,31 @@ LRESULT CALLBACK Window::WndProc(
             return 0;
         }
     }
-    
+
+    if (uMsg == WM_INPUT) {
+        auto handle = reinterpret_cast<HRAWINPUT>(lParam);
+        RAWINPUT input{};
+        UINT dataSize = sizeof(RAWINPUT);
+        UINT headerSize = sizeof(RAWINPUTHEADER);
+
+        if (GetRawInputData(handle, RID_INPUT, &input, &dataSize, headerSize)
+            == -1) {
+            // TODO: Error handling in WndProc
+            return 0;
+        }
+
+        if (input.header.dwType == RIM_TYPEKEYBOARD) {
+            if (window->m_hWnd && window->m_onKeyboard) {
+                window->m_onKeyboard(
+                    translateVKeyToKeyCode(input.data.keyboard.VKey),
+                    translateMessageToKeyState(input.data.keyboard.Message)
+                );
+            }
+            return 0;
+        }
+
+    }
+
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
