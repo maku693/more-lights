@@ -18,13 +18,16 @@ enum class KeyState;
 
 class Window final {
 public:
+    using OnCloseHandlerType = typename std::function<void()>;
+    using OnKeyboardHandlerType = std::function<void(KeyCode, KeyState)>;
+
     Window(HINSTANCE);
 
     HWND getHWnd() const noexcept;
     Util::Size getSize() const;
 
-    void setOnClose(std::function<void()>) noexcept;
-    void setOnKeyboard(std::function<void(KeyCode, KeyState)>) noexcept;
+    void setOnClose(OnCloseHandlerType) noexcept;
+    void setOnKeyboard(OnKeyboardHandlerType) noexcept;
     void setTitle(const std::string&) noexcept;
 
     void display() noexcept;
@@ -33,8 +36,8 @@ public:
 private:
     HWND m_hWnd;
     bool m_isFullScreen;
-    std::function<void()> m_onClose;
-    std::function<void(KeyCode, KeyState)> m_onKeyboard;
+    OnCloseHandlerType m_onClose;
+    OnKeyboardHandlerType m_onKeyboard;
 
     static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 };

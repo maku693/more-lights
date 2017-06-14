@@ -53,12 +53,12 @@ Util::Size Window::getSize() const
         static_cast<float>(r.bottom - r.top) };
 }
 
-void Window::setOnClose(std::function<void()> onClose) noexcept
+void Window::setOnClose(Window::OnCloseHandlerType onClose) noexcept
 {
     this->m_onClose = onClose;
 }
 
-void Window::setOnKeyboard(std::function<void(KeyCode, KeyState)> onKeyboard) noexcept
+void Window::setOnKeyboard(Window::OnKeyboardHandlerType onKeyboard) noexcept
 {
     this->m_onKeyboard = onKeyboard;
 }
