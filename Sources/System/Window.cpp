@@ -98,7 +98,7 @@ LRESULT CALLBACK Window::WndProc(
         reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
     if (uMsg == WM_DESTROY) {
-        if (window->m_hWnd) {
+        if (window->m_hWnd && window->m_onClose) {
             window->m_onClose();
             return 0;
         }
