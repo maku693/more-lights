@@ -1,13 +1,20 @@
 #pragma once
 
-#include <functional>
+#include <memory>
 
 namespace System {
 
+class Window;
+
 class Application final {
 public:
-    int run(std::function<void()>) const;
+    void setWindow(std::shared_ptr<Window>) noexcept;
+
+    int run() const;
     void terminate() const noexcept;
+
+private:
+    std::shared_ptr<Window> m_window;
 };
 
 } // namespace System

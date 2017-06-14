@@ -30,6 +30,13 @@ Window::Window(HINSTANCE hInstance)
     if (!this->m_hWnd) {
         throw std::runtime_error("Window creation failed");
     }
+
+    SetLastError(0);
+    SetWindowLongPtrW(
+        this->m_hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
+    if (GetLastError()) {
+        throw std::runtime_error("Can't set user data to a HWND");
+    }
 }
 
 HWND Window::getHWnd() const noexcept { return this->m_hWnd; }
@@ -48,6 +55,11 @@ Util::Size Window::getSize() const
 bool Window::isVisible() const noexcept
 {
     return IsWindowVisible(this->m_hWnd);
+}
+
+void Window::setOnClose(std::function<void()> onClose) noexcept
+{
+    this->m_onClose = onClose;
 }
 
 void Window::setTitle(const std::string& title) noexcept
@@ -87,7 +99,16 @@ void Window::makeFullScreen()
 LRESULT CALLBACK Window::WndProc(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) noexcept
 {
-    // TODO: handle window messages and translate to app-local messages
+    auto window =
+        reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+
+    if (uMsg == WM_DESTROY) {
+        if (window->m_hWnd) {
+            window->m_onClose();
+            return 0;
+        }
+    }
+    
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 

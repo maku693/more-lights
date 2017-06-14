@@ -5,14 +5,14 @@
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int)
 {
-    const System::Application app;
-    System::Window window{ hInstance };
+    System::Application app;
+    auto window = std::make_shared<System::Window>(hInstance);
 
-    window.display();
-
-    return app.run([&] {
-        if (!window.isVisible()) {
-            app.terminate();
-        }
+    app.setWindow(window);
+    window->setOnClose([&app] {
+        app.terminate();
     });
+
+    window->display();
+    return app.run();
 }

@@ -2,14 +2,20 @@
 
 #include <windows.h>
 
+#include "System/Window.hpp"
+
 namespace System {
 
-int Application::run(std::function<void()> mainLoop) const
+void Application::setWindow(std::shared_ptr<Window> window) noexcept
+{
+    this->m_window = window;
+}
+
+int Application::run() const
 {
     MSG message{};
     while (true) {
         if (!PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) {
-            mainLoop();
             continue;
         }
 
