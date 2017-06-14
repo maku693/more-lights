@@ -13,7 +13,7 @@ class Size;
 
 namespace System {
 
-class Window {
+class Window final {
 public:
     Window(HINSTANCE);
 
