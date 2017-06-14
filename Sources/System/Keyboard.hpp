@@ -1,5 +1,7 @@
 #pragma once
 
+#include <windows.h>
+
 namespace System {
 
 enum class KeyCode {
