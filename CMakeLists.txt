@@ -11,6 +11,10 @@ file(GLOB_RECURSE SOURCE_FILES "Sources/*.cpp")
 
 add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
 
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
+  "${CMAKE_SOURCE_DIR}/External/glm/"
+  )
+
 target_include_directories(${PROJECT_NAME} PRIVATE 
   "${CMAKE_SOURCE_DIR}/Sources"
   )
