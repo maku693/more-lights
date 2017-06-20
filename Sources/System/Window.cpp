@@ -63,6 +63,11 @@ void Window::setOnKeyboard(Window::OnKeyboardHandlerType onKeyboard) noexcept
     this->m_onKeyboard = onKeyboard;
 }
 
+void Window::setOnUpdate(Window::OnUpdateHandlerType onUpdate) noexcept
+{
+    this->m_onUpdate = onUpdate;
+}
+
 void Window::setTitle(const std::string& title) noexcept
 {
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> convert;
@@ -142,7 +147,13 @@ LRESULT CALLBACK Window::WndProc(
             }
             return 0;
         }
+    }
 
+    if (uMsg == WM_PAINT) {
+        if (window->m_hWnd && window->m_onUpdate) {
+            window->m_onUpdate();
+            return 0;
+        }
     }
 
     return DefWindowProc(hWnd, uMsg, wParam, lParam);

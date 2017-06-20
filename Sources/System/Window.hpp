@@ -20,6 +20,7 @@ class Window final {
 public:
     using OnCloseHandlerType = typename std::function<void()>;
     using OnKeyboardHandlerType = std::function<void(KeyCode, KeyState)>;
+    using OnUpdateHandlerType = typename std::function<void()>;
 
     Window(HINSTANCE);
 
@@ -28,6 +29,7 @@ public:
 
     void setOnClose(OnCloseHandlerType) noexcept;
     void setOnKeyboard(OnKeyboardHandlerType) noexcept;
+    void setOnUpdate(OnUpdateHandlerType) noexcept;
     void setTitle(const std::string&) noexcept;
 
     void display() noexcept;
@@ -39,6 +41,7 @@ private:
     bool m_isFullScreen;
     OnCloseHandlerType m_onClose;
     OnKeyboardHandlerType m_onKeyboard;
+    OnUpdateHandlerType m_onUpdate;
 
     static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM) noexcept;
 };
