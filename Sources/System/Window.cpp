@@ -120,7 +120,7 @@ LRESULT CALLBACK Window::WndProc(
         reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
     if (uMsg == WM_DESTROY) {
-        if (window->m_hWnd && window->m_onClose) {
+        if (window->m_hWnd != nullptr && window->m_onClose != nullptr) {
             window->m_onClose();
             return 0;
         }
@@ -139,7 +139,7 @@ LRESULT CALLBACK Window::WndProc(
         }
 
         if (input.header.dwType == RIM_TYPEKEYBOARD) {
-            if (window->m_hWnd && window->m_onKeyboard) {
+            if (window->m_hWnd != nullptr && window->m_onKeyboard != nullptr) {
                 window->m_onKeyboard(
                     translateVKeyToKeyCode(input.data.keyboard.VKey),
                     translateMessageToKeyState(input.data.keyboard.Message)
@@ -150,7 +150,7 @@ LRESULT CALLBACK Window::WndProc(
     }
 
     if (uMsg == WM_PAINT) {
-        if (window->m_hWnd && window->m_onUpdate) {
+        if (window->m_hWnd != nullptr && window->m_onUpdate != nullptr) {
             window->m_onUpdate();
             return 0;
         }
