@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-file(GLOB_RECURSE SOURCE_FILES "Sources/*.cpp")
+file(GLOB_RECURSE SOURCES "Sources/*.cpp")
 
 
-add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} WIN32 ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
   "${CMAKE_SOURCE_DIR}/External/glm/"
