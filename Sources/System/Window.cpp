@@ -97,6 +97,17 @@ void Window::makeFullScreen()
     this->m_isFullScreen = true;
 }
 
+void Window::update()
+{
+    if (!IsWindowVisible(this->m_hWnd)) {
+        return;
+    }
+
+    if (!RedrawWindow(this->m_hWnd, nullptr, nullptr, RDW_INTERNALPAINT)) {
+        throw std::runtime_error("Can't redraw window");
+    }
+}
+
 LRESULT CALLBACK Window::WndProc(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) noexcept
 {

@@ -16,6 +16,7 @@ int Application::run() const
     MSG message{};
     while (true) {
         if (!PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) {
+            this->m_window->update();
             continue;
         }
 

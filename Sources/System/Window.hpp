@@ -32,6 +32,7 @@ public:
 
     void display() noexcept;
     void makeFullScreen();
+    void update();
 
 private:
     HWND m_hWnd;
